@@ -1,6 +1,8 @@
-// controllers/presController.js
-const Presupuesto = require('../models/Presupuesto');
+const path = require('path');
+
+const Presupuesto = require(path.resolve(__dirname, '../models/Presupuesto'));
 const mongoose = require('mongoose');
+
 
 // ✅ Crear Presupuesto
 exports.crearPresupuesto = async (req, res) => {

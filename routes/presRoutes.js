@@ -1,7 +1,9 @@
+const path = require('path');
+
 const express = require('express');
 const router = express.Router();
-const auth = require('../auth/auth');
-const presController = require('../controllers/presController'); // ✅ esta línea
+const auth = require(path.resolve(__dirname, '../auth/auth'));
+const presController = require(path.resolve(__dirname, '../controllers/presController')); // ✅ esta línea
 
 router.post('/', auth, presController.crearPresupuesto);
 router.get('/', auth, presController.obtenerPresupuestos);

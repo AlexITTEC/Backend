@@ -1,7 +1,9 @@
+const path = require('path');
+
 const express = require('express');
 const router = express.Router();
-const transaccionController = require('../controllers/transController');
-const auth = require('../auth/auth');
+const transaccionController = require(path.resolve(__dirname, '../controllers/transController'));
+const auth = require(path.resolve(__dirname, '../auth/auth'));
 
 // ✅ Crear transacción (autenticado)
 router.post('/', auth, transaccionController.crearTransaccion);

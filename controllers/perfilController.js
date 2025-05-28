@@ -1,5 +1,8 @@
-const Usuario = require('../models/Usuarios');
+const path = require('path');
+
+const Usuario = require(path.resolve(__dirname, '../models/Usuarios'));
 const bcrypt = require('bcrypt');
+
 // PUT /api/perfil
 const actualizarPerfil = async (req, res) => {
   try {

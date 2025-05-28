@@ -1,4 +1,5 @@
-const MetaAhorro = require('../models/MetaAhorro');
+const path = require('path');
+const MetaAhorro = require(path.resolve(__dirname, '../models/MetaAhorro'));
 
 // ✅ Crear meta contextual al usuario con categoría
 exports.crearMeta = async (req, res) => {

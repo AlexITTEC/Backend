@@ -1,7 +1,9 @@
+const path = require('path');
+
 const express = require('express');
 const router = express.Router();
-const auth = require('../auth/auth');
-const metaAhorroController = require('../controllers/metaController');
+const auth = require(path.resolve(__dirname, '../auth/auth'));
+const metaAhorroController = require(path.resolve(__dirname, '../controllers/metaController'));
 
 router.post('/', auth, metaAhorroController.crearMeta);
 router.get('/', auth, metaAhorroController.obtenerMetas);

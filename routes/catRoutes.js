@@ -1,7 +1,9 @@
+const path = require('path');
+
 const express = require('express');
 const router = express.Router();
-const categoriaController = require('../controllers/catController');
-const auth = require('../auth/auth');
+const categoriaController = require(path.resolve(__dirname, '../controllers/catController'));
+const auth = require(path.resolve(__dirname, '../auth/auth'));
 
 router.get('/', auth, categoriaController.obtenerCategorias);
 router.post('/', auth, categoriaController.crearCategoria);

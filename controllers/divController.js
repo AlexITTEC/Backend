@@ -1,4 +1,5 @@
-const Divisa = require('../models/Divisa');
+const path = require('path');
+const Divisa = require(path.resolve(__dirname, '../models/Divisa'));
 
 exports.crearDivisa = async (req, res) => {
   try {

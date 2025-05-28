@@ -1,4 +1,5 @@
-const SaludFinanciera = require('../models/SaludFinanciera');
+const path = require('path');
+const SaludFinanciera = require(path.resolve(__dirname, '../models/SaludFinanciera'));
 
 // Guardar o actualizar contenido
 const guardarContenido = async (req, res) => {

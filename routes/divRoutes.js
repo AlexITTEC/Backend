@@ -1,6 +1,8 @@
+const path = require('path');
+
 const express = require('express');
 const router = express.Router();
-const divisaController = require('../controllers/divController');
+const divisaController = require(path.resolve(__dirname, '../controllers/divController'));
 
 router.post('/', divisaController.crearDivisa);
 router.get('/', divisaController.obtenerDivisas);

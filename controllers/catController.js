@@ -1,5 +1,7 @@
-const Categoria = require('../models/Categoria');
-const Presupuesto = require('../models/Presupuesto'); // 👈 necesario para validar el presupuesto
+const path = require('path');
+
+const Categoria = require(path.resolve(__dirname, '../models/Categoria'));
+const Presupuesto = require(path.resolve(__dirname, '../models/Presupuesto')); // 👈 necesario para validar el presupuesto
 
 // ✅ Crear categoría
 exports.crearCategoria = async (req, res) => {

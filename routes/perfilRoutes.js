@@ -1,8 +1,10 @@
+const path = require('path');
+
 const express = require('express');
 const router = express.Router();
-const auth = require('../auth/auth');
-const perfilController = require('../controllers/perfilController');
-const upload = require('../auth/uploadAvatar');
+const auth = require(path.resolve(__dirname, '../auth/auth'));
+const perfilController = require(path.resolve(__dirname, '../controllers/perfilController'));
+const upload = require(path.resolve(__dirname, '../auth/uploadAvatar'));
 
 // Ruta para actualizar datos del perfil del usuario autenticado
 router.put('/', auth, perfilController.actualizarPerfil);

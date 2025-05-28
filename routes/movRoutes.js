@@ -1,6 +1,8 @@
+const path = require('path');
+
 const express = require('express');
 const router = express.Router();
-const movimientoController = require('../controllers/movController');
+const movimientoController = require(path.resolve(__dirname, '../controllers/movController'));
 
 router.post('/', movimientoController.crearMovimiento);
 router.get('/', movimientoController.obtenerMovimientos);

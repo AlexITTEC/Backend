@@ -1,4 +1,6 @@
-const Gasto = require('../models/gastos');
+const path = require('path');
+const Gasto = require(path.resolve(__dirname, '../models/gastos'));
+
 
 // Controlador para agregar un nuevo gasto
 exports.createGasto = async (req, res) => {

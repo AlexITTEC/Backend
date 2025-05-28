@@ -1,6 +1,8 @@
+const path = require('path');
+
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const Usuario = require('../models/Usuarios');
+const Usuario = require(path.resolve(__dirname, '../models/Usuarios'));
 
 // ✅ CREAR USUARIO (con avatar por defecto)
 exports.crearUsuario = async (req, res) => {

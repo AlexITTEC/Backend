@@ -1,11 +1,13 @@
+const path = require('path');
+
 // Importación de dependencias
 const express = require('express');
 const router = express.Router();
-const usuarioController = require('../controllers/usuarioController');
+const usuarioController = require(path.resolve(__dirname, '../controllers/usuarioController'));
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const Usuario = require('../models/Usuarios');
-const { enviarCodigoPorCorreo } = require('../services/emailService');
+const Usuario = require(path.resolve(__dirname, '../models/Usuarios'));
+const { enviarCodigoPorCorreo } = require(path.resolve(__dirname, '../services/emailService'));
 const JWT_SECRET = process.env.JWT_SECRET || 'mi_super_secreto';
 
 // Middleware para verificar JWT

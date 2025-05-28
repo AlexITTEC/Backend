@@ -1,4 +1,5 @@
-const Movimiento = require('../models/Movimiento');
+const path = require('path');
+const Movimiento = require(path.resolve(__dirname, '../models/Movimiento'));
 
 exports.crearMovimiento = async (req, res) => {
   try {

@@ -1,8 +1,9 @@
 
-// ✅ Crear nueva transacción con lógica de estado
-const Transaccion = require('../models/Transaccion');
-const Presupuesto = require('../models/Presupuesto');
-const Categoria = require('../models/Categoria'); // asegúrate de importar el modelo
+const path = require('path');
+
+const Transaccion = require(path.resolve(__dirname, '../models/Transaccion'));
+const Presupuesto = require(path.resolve(__dirname, '../models/Presupuesto'));
+const Categoria = require(path.resolve(__dirname, '../models/Categoria')); // asegúrate de importar el modelo
 
 // ✅ Crear nueva transacción con lógica de presupuesto automático
 exports.crearTransaccion = async (req, res) => {
