@@ -1,38 +1,41 @@
 const express = require('express');
 const multer = require('multer');
-const path = require('path');
 const router = express.Router();
+const Imagen = require('../models/Imagen'); // importa el modelo
 
-// Configuración del almacenamiento con Multer
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/');
-  },
-  filename: function (req, file, cb) {
-    const ext = path.extname(file.originalname);
-    const name = Date.now() + '-' + Math.round(Math.random() * 1e9) + ext;
-    cb(null, name);
-  }
-});
-
+const storage = multer.memoryStorage(); // ⚠️ importante: en memoria
 const upload = multer({ storage });
 
-// Ruta POST para subir imagen desde Editor.js
-router.post('/upload-image', upload.single('image'), (req, res) => {
+router.post('/upload-image', upload.single('image'), async (req, res) => {
   const file = req.file;
   if (!file) {
-    return res.status(400).json({
-      success: 0,
-      message: 'No se subió ningún archivo'
-    });
+    return res.status(400).json({ success: 0, message: 'No se subió ningún archivo' });
   }
 
-  res.status(200).json({
-    success: 1,
-    file: {
-      url: `http://localhost:3000/uploads/${file.filename}`
-    }
-  });
+  try {
+    // Convertir a base64
+    const base64 = `data:${file.mimetype};base64,${file.buffer.toString('base64')}`;
+
+    // Guardar en MongoDB
+    const nuevaImagen = new Imagen({
+      nombre: file.originalname,
+      mimeType: file.mimetype,
+      base64
+    });
+
+    await nuevaImagen.save();
+
+    res.status(200).json({
+      success: 1,
+      file: {
+        url: base64 // directamente usable como src en <img />
+      }
+    });
+
+  } catch (err) {
+    console.error("Error al guardar imagen:", err);
+    res.status(500).json({ success: 0, message: 'Error interno al guardar la imagen' });
+  }
 });
 
 module.exports = router;

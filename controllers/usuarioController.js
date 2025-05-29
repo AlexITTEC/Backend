@@ -18,7 +18,7 @@ exports.crearUsuario = async (req, res) => {
       email,
       contraseña, // el pre-save ya hace el hash
       nombres,
-      avatar: "http://localhost:3000/uploads/avatars/default-avatar.png" // ✅ avatar por defecto con URL completa
+      avatar: ""// ✅ avatar por defecto con URL completa
     });
 
     await nuevoUsuario.save();
@@ -54,28 +54,29 @@ exports.autenticarUsuario = async (req, res) => {
       return res.status(401).json({ mensaje: 'Contraseña incorrecta' });
     }
 
-    const token = jwt.sign(
-      {
-        id: usuario._id,
-        nombres: usuario.nombres,
-        email: usuario.email,
-        rol: usuario.rol,
-        avatar: usuario.avatar || "http://localhost:3000/uploads/avatars/default-avatar.png" // ✅ avatar incluido
-      },
-      process.env.JWT_SECRET,
-      { expiresIn: '1d' }
-    );
+   const token = jwt.sign(
+  {
+    id: usuario._id,
+    nombres: usuario.nombres,
+    email: usuario.email,
+    rol: usuario.rol,
+    avatar: usuario.avatar || ""
+  },
+  process.env.JWT_SECRET,
+  { expiresIn: '1d' }
+);
 
-    res.json({
-      token,
-      usuario: {
-        id: usuario._id,
-        nombres: usuario.nombres,
-        email: usuario.email,
-        rol: usuario.rol,
-        avatar: usuario.avatar || "http://localhost:3000/uploads/avatars/default-avatar.png"
-      }
-    });
+res.json({
+  token,
+  usuario: {
+    id: usuario._id,
+    nombres: usuario.nombres,
+    email: usuario.email,
+    rol: usuario.rol,
+    avatar: usuario.avatar || ""
+  }
+});
+
 
   } catch (error) {
     res.status(500).json({ mensaje: 'Error al autenticar usuario', error });
