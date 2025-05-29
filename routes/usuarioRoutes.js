@@ -87,6 +87,27 @@ router.get('/perfil', verificarToken, async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+// Actualizar avatar del usuario
+router.put('/perfil/avatar', verificarToken, async (req, res) => {
+  try {
+    const { avatar } = req.body;
+
+    if (!avatar) {
+      return res.status(400).json({ mensaje: 'Avatar es requerido' });
+    }
+
+    const usuario = await Usuario.findById(req.usuario.id);
+    if (!usuario) return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+
+    usuario.avatar = avatar;
+    await usuario.save();
+
+    res.json({ mensaje: 'Avatar actualizado exitosamente', avatar });
+  } catch (err) {
+    console.error('Error al actualizar avatar:', err);
+    res.status(500).json({ mensaje: 'Error al actualizar avatar' });
+  }
+});
 
 // ✅ Ruta temporal para hacer admin a un usuario existente
 router.put('/set-admin/:email', async (req, res) => {
