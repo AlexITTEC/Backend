@@ -25,12 +25,13 @@ router.post('/upload-image', upload.single('image'), async (req, res) => {
 
     await nuevaImagen.save();
 
-    res.status(200).json({
-      success: 1,
-      file: {
-        url: base64 // directamente usable como src en <img />
-      }
-    });
+res.status(200).json({
+  success: 1,
+  file: {
+    url: `${process.env.BASE_PUBLIC_URL}/api/imagenes/${nuevaImagen._id}`
+  }
+});
+
 
   } catch (err) {
     console.error("Error al guardar imagen:", err);

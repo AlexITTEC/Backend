@@ -29,7 +29,8 @@ app.use('/api/divisas', require('./routes/divRoutes'));
 app.use('/api/metas', require('./routes/metaRoutes'));
 app.use('/api/salud', require('./routes/saludRoutes')); // ✅ salud financiera
 app.use('/api/perfil', require('./routes/perfilRoutes'));
-
+const rutaImagenes = require('./routes/imagenes');
+app.use('/api/imagenes', rutaImagenes);
 // Rutas adicionales
 app.use('/api', require('./routes/upload.routes')); // subir imágenes
 app.use('/api', require('./routes/fetch.routes'));  // previews de enlaces
